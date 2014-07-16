@@ -7,17 +7,14 @@ and open the template in the editor.
 <?php
     //GET引数を分解し配列として整形する。
     if(isset($_GET)){
-        $log = "";
         $attributeString = $_GET["attributes"];
-        $attributes[] = null;
+        $attributeString = trim($attributeString);
+        $attributes = array();
         $word = "";
         for($i = 0; $i < strlen($attributeString); $i++){
-            $log .= $attributeString[$i];
             if($attributeString[$i] != " "){
-                $log .= "Apppend ";
                 $word .= $attributeString[$i];
             }else{
-                $log .= "Next word ";
                 if($word != " "){
                     array_push($attributes, $word);
                 }
@@ -26,10 +23,6 @@ and open the template in the editor.
             }
         }
         array_push($attributes, $word);
-        //unset($attributes[0]);
-        //unset($attributes[count($attributes) - 1]);
-        $log .= count($attributes);
-        $log .= $attributes[0];
     }
 ?>
 <html>
@@ -58,7 +51,7 @@ and open the template in the editor.
                 <section id="diagnose">
                     <h1>Result</h1>
                     <?= $attributeString?>
-                    <?= $log ?>
+                    <?= $attributes[0] ?>
                 </section>
                 <section>
                     <p id="ads">ads</p>
