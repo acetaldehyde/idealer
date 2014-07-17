@@ -38,7 +38,7 @@ class Dealer {
         }
 
         //SQLを作る
-        $sql = "SELECT idVehicle, idAttribute, count FROM idealerDB.vehicleAttributeList where idAttribute in(";
+        $sql = "SELECT idVehicle, idAttribute, count FROM idealer.vehicle_image where idAttribute in(";
         $flag = true;
         while ($flag) {
             $sql = $sql . $iterableIdealList->current();
@@ -50,7 +50,7 @@ class Dealer {
                 $flag = false;
             }
         }
-        
+         
         //echo $sql . "\n";
         //SQLを実行して取得した結果セットをVehicleオブジェクト化
         $result = mysql_query($sql);
@@ -123,11 +123,12 @@ class Dealer {
     }
 
 }
-
+/*
 $dealer = new Dealer;
 
-$atlist = array(2, 11);
+$atlist = array(1, 3);
 $reccomends = $dealer->diagnose($atlist);
 foreach ($reccomends as $idVehicle){
     echo $idVehicle . "\n";
 }
+*/

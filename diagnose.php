@@ -4,6 +4,11 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+<?php
+    header("Content-Type: text/html; charset=UTF-8");
+    require_once("./PHP/AttributeShower.php");
+    $choices = getChoises();
+?>
 <html>
     <head>
         <title>iDealer Diagnose</title>
@@ -36,9 +41,7 @@ and open the template in the editor.
                         <div id="attribute_choices">
                             <!-- 選択肢は自動生成する予定 -->
                             <h2>Choose from here!</h2>
-                            <span id="choice" onClick="document.form.attributes.value = document.form.attributes.value + 'Cool ';">Cool</span>
-                            <span id="choice" onClick="document.form.attributes.value = document.form.attributes.value + 'Cute ';">Cute</span>
-                            <span id="choice" onClick="document.form.attributes.value = document.form.attributes.value + 'Wild ';">Wild</span>
+                            <?= $choices ?>
                         </div>
                         <input type="submit" name="submit" id="submit_button" title="SUBMIT">
                     </form>

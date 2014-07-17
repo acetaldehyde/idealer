@@ -18,7 +18,6 @@ and open the template in the editor.
                 if($word != " "){
                     array_push($attributes, $word);
                 }
-                $log .= $word;
                 $word = "";
             }
         }
