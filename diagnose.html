@@ -31,7 +31,8 @@ and open the template in the editor.
                 <section id="diagnose">
                     <h1>Choose your attribute.</h1>
                     <form name="form" action="./diagnose_result.php" method="get">
-                        <input type="text" name="attributes" value="" size="100">
+                        <input type="text" name="attributes" value="" size="100" id="input_form">
+                        <span id="clear_button" onClick="document.form.attributes.value = '';">Clear</span>
                         <div id="attribute_choices">
                             <!-- 選択肢は自動生成する予定 -->
                             <h2>Choose from here!</h2>
@@ -39,7 +40,7 @@ and open the template in the editor.
                             <span id="choice" onClick="document.form.attributes.value = document.form.attributes.value + 'Cute ';">Cute</span>
                             <span id="choice" onClick="document.form.attributes.value = document.form.attributes.value + 'Wild ';">Wild</span>
                         </div>
-                        <input type="submit" name="submit">
+                        <input type="submit" name="submit" id="submit_button" title="SUBMIT">
                     </form>
                 </section>
                 <section>

@@ -50,7 +50,6 @@ and open the template in the editor.
                 </section>
                 <section id="diagnose">
                     <h1>Result</h1>
-                    <?= $attributeString?>
                     <?= $attributes[0] ?>
                 </section>
                 <section>

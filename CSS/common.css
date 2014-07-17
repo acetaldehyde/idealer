@@ -97,3 +97,36 @@ section{
     font-weight: bold;
     cursor: pointer;
 }
+#input_form{
+    border:0;
+    padding:10px;
+    font-size:1.3em;
+    font-family:Arial, sans-serif;
+    color:#aaa;
+    border:solid 1px #ccc;
+    margin:0 0 20px;
+    width:80%;
+    height: 50px;
+}
+#submit_button{
+    border:solid 1px #ccc;
+    padding:15px 30px;
+    margin:1em 0 20px;
+    font-family:Arial, sans-serif;
+    font-size:1.2em;
+    text-transform:uppercase;
+    font-weight:bold;
+    color:#333;
+    cursor:pointer;
+}
+#clear_button{
+    border:solid 1px #ccc;
+    margin:0 0 20px;
+    font-family:Arial, sans-serif;
+    font-size:1.2em;
+    text-transform:uppercase;
+    font-weight:bold;
+    color:#333;
+    cursor:pointer;
+    height: 50px;
+}
