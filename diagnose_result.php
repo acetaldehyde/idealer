@@ -5,11 +5,13 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php
+    header("Content-Type: text/html; charset=UTF-8");
     //GET引数を分解し配列として整形する。
+    $attributes;
     if(isset($_GET)){
+        $attributes = array();
         $attributeString = $_GET["attributes"];
         $attributeString = trim($attributeString);
-        $attributes = array();
         $word = "";
         for($i = 0; $i < strlen($attributeString); $i++){
             if($attributeString[$i] != " "){
@@ -22,6 +24,21 @@ and open the template in the editor.
             }
         }
         array_push($attributes, $word);
+    }
+    $choosenAttributes = "";
+    $recommendedVehicles = "";
+    if(count($attributes) > 0 && $attributes[0] != ""){
+        foreach ($attributes as $attribute) {
+            $choosenAttributes .= "<span id='choice' style='cursor: auto'>" . $attribute . "</span>";
+        }
+        require_once './PHP/Dealer.php';
+        $dealer = new Dealer();
+        $recommends = $dealer->diagnose($attributes);
+        foreach ($recommends as $recommend) {
+            $recommendedVehicles .= "<li>" . $recommend . "</li>";
+        }
+    }else{
+        echo 'ERROR: NO ATTRIBUTE.';
     }
 ?>
 <html>
@@ -49,7 +66,12 @@ and open the template in the editor.
                 </section>
                 <section id="diagnose">
                     <h1>Result</h1>
-                    <?= $attributes[0] ?>
+                    <div id="attribute_choices">
+                        <?= $choosenAttributes ?>
+                    </div>
+                    <ol type="1" id="recommendedVehicles">
+                        <?= $recommendedVehicles ?>
+                    </ol>
                 </section>
                 <section>
                     <p id="ads">ads</p>

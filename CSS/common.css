@@ -132,3 +132,16 @@ section{
     cursor:pointer;
     height: 50px;
 }
+#recommendedVehicles{
+    width: 50%;
+    padding: 0.1em;
+    margin: auto;
+}
+#recommendedVehicles li{
+    background-color: #f7f467;
+    color: #72dd65;
+    font-size: 2em;
+    padding: 0.2em;
+    margin-bottom: 0.1em;
+    margin-top: 0.1em;
+}

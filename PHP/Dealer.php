@@ -1,5 +1,5 @@
 <?php
-
+header("Content-Type: text/html; charset=UTF-8");
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -23,6 +23,9 @@ class Dealer {
         if (!$this->link) {
             // "Error. MySQL connect failed.";
         }
+        //超重要！　文字化け対策
+        mysql_selectdb("idealer", $this->link);
+        mysql_query('SET NAMES utf8', $this->link);
     }
 
     //診断ファンクション　引数は理想IDリストで型はArrayIterator
@@ -30,7 +33,13 @@ class Dealer {
      * 返却値は車種IDリスト
      * 
      */
-    public function diagnose($idealIdList) {
+    public function diagnose($idealList) {  
+        //理想リストを理想IDリストに変換
+        $idealIdList = array();
+        foreach ($idealList as $ideal) {
+            array_push($idealIdList, $this->attirbuteTitle2Id($ideal));
+        }
+        
         //理想IDリストをArrayItaratorに変換
         $iterableIdealList = new ArrayIterator();
         foreach ($idealIdList as $ideal) {
@@ -90,8 +99,14 @@ class Dealer {
         
         //上位三つを配列にする
         $recommendedVehicleList = array();
-        for($i = 0; $i < 3; $i++){
-            array_push($recommendedVehicleList, $vehicles[$i]->getIdVehicle());
+        if(count($vehicles) >= 3){
+            for($i = 0; $i < 3; $i++){
+                array_push($recommendedVehicleList, $this->vehicleId2Name($vehicles[$i]->getIdVehicle()));
+            }
+        }else{
+            foreach ($vehicles as $vehicle) {
+                array_push($recommendedVehicleList, $this->vehicleId2Name($vehicle->getIdVehicle()));
+            }
         }
         
         return $recommendedVehicleList;
@@ -116,6 +131,20 @@ class Dealer {
         // 左右のデータを再帰的にソートする
         return array_merge($this->quicksort($left, $idealIdList), array($pivot), $this->quicksort($right, $idealIdList));
     }
+    
+    private function attirbuteTitle2Id($title){
+         $sql = "select idAttribute from idealer.attributes where title = '" . $title . "'";
+         $result = mysql_query($sql);
+         $row = mysql_fetch_assoc($result);
+         return $row['idAttribute'];
+    }
+    
+    private function vehicleId2Name($vehicleId){
+        $sql = "select name from idealer.vehicles where idVehicle = '" . $vehicleId . "'";
+         $result = mysql_query($sql);
+         $row = mysql_fetch_assoc($result);
+         return $row['name'];
+    }
 
     //学習ファンクション　引数は興味を持った車両IDと理想リスト
     public function hearing($vehicleId, $idealList) {
@@ -125,10 +154,9 @@ class Dealer {
 }
 /*
 $dealer = new Dealer;
-
-$atlist = array(1, 3);
+$atlist = array("大人", "重い");
+echo $atlist[0] . $atlist[1];
 $reccomends = $dealer->diagnose($atlist);
 foreach ($reccomends as $idVehicle){
     echo $idVehicle . "\n";
-}
-*/
+}*/

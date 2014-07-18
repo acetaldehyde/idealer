@@ -12,6 +12,8 @@ and open the template in the editor.
     <body>
         <?php
         // put your code here
+        require_once './PHP/Dealer.php';
+        header("Content-Type: text/html; charset=UTF-8");
         ?>
     </body>
 </html>
